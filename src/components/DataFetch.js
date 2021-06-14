@@ -12,7 +12,6 @@ function DataFetch(dispatch) {
         );
         const decipherPage = await requestStarWarsPage.data.results;
         characterList = [...characterList, ...decipherPage];
-        console.log(characterList);
         pageNumber++;
       }
       requestCharacterInfo(characterList, dispatch);
@@ -23,20 +22,20 @@ function DataFetch(dispatch) {
   requestStarWarsLibrary(dispatch);
 }
 
-async function requestCharacterInfo(characterList, setGalacticLibrary) {
+async function requestCharacterInfo(characterList, dispatch) {
   try {
-    characterList.map(async (item) => {
-      const characterSpecies = await axios.get(item.species);
-      const speciesName = await characterSpecies.data.name;
-      const characterHome = await axios.get(item.homeworld);
-      const homeName = await characterHome.data.name;
+    characterList.map(async (character) => {
+      const requestCharacterSpecies = await axios.get(character.species);
+      const speciesName = await requestCharacterSpecies.data.name;
+      const requestCharacterHome = await axios.get(character.homeworld);
+      const homeName = await requestCharacterHome.data.name;
       const updatedCharacterList = [
         ...characterList,
-        (item.species = speciesName ? speciesName : "Human"),
-        (item.homeworld = homeName),
+        (character.species = speciesName ? speciesName : "Human"),
+        (character.homeworld = homeName),
       ];
       updatedCharacterList.splice(updatedCharacterList.length - 2);
-      setGalacticLibrary({
+      dispatch({
         type: PAGE_CONTROL.SAVING,
         value: updatedCharacterList,
       });

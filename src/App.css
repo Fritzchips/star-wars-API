@@ -1,0 +1,21 @@
+.App {
+  min-height: 100vh;
+  min-width: 100vh;
+  background-color: black;
+  color: yellow;
+}
+
+.header-modify {
+  font-family: fantasy;
+  font-size: 50px;
+}
+
+.table-header {
+  font-size: 30px;
+}
+
+.btn-modify {
+  border-radius: 7px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

@@ -4,6 +4,8 @@ import TableField from "./components/TableField";
 import InputField from "./components/InputField";
 import DataFetch from "./components/DataFetch";
 import useController, { PAGE_CONTROL } from "./components/useController";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
 
 export const libraryContext = React.createContext();
 
@@ -45,26 +47,27 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <h1>Galactic Oracle</h1>
-        <p>
-          "Using the most ancient power of the force. Transcend through space
-          and time, gain knowledge of beings that help write the history."
-        </p>
-      </header>
-      <br></br>
-      <libraryContext.Provider
-        value={{
-          galacticLibrary: galacticLibrary,
-          dispatch: dispatch,
-        }}
-      >
-        <InputField />
-        <button onClick={checkHandler}>Check Value</button>
-        <button onClick={deleteHandler}>DeleteLocal</button>
+      <Container>
+        <header className="text-center">
+          <h1 className="header-modify">Galactic Oracle</h1>
+          <p>"Using the most ancient power of the force.</p>
+          <p>Transcend through space and time,</p>{" "}
+          <p>gain knowledge of beings that help write history."</p>
+        </header>
         <br></br>
-        <TableField />
-      </libraryContext.Provider>
+        <libraryContext.Provider
+          value={{
+            galacticLibrary: galacticLibrary,
+            dispatch: dispatch,
+          }}
+        >
+          <InputField />
+          <button onClick={checkHandler}>Check Value</button>
+          <button onClick={deleteHandler}>DeleteLocal</button>
+          <br></br>
+          <TableField />
+        </libraryContext.Provider>
+      </Container>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import React from "react";
+import "../App.css";
 import TableDisplay from "./TableDisplay";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Table from "react-bootstrap/Table";
 
 function TableField() {
   return (
     <div>
-      <table>
-        <thead>
+      <Table variant="dark" className="text-center" bordered hover>
+        <thead className="table-header">
           <tr>
             <th>Name</th>
             <th>Birth Date</th>
@@ -15,10 +18,10 @@ function TableField() {
             <th>Species</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody striped>
           <TableDisplay />
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 }
