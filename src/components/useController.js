@@ -12,16 +12,19 @@ const initialState = {
   localCopy: [],
   userPreview: [],
   currentPage: 1,
+  removalDate: "",
 };
 
 const reducer = (state, action) => {
   const { localCopy, currentPage } = state;
   switch (action.type) {
     case PAGE_CONTROL.SAVING:
+      const twoMins = 1000 * 30;
       return {
         ...state,
         localCopy: [...action.value],
         userPreview: localCopy.slice(0, 10),
+        removalDate: Date.now() + twoMins,
       };
 
     case PAGE_CONTROL.LOADING:
