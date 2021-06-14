@@ -11,8 +11,8 @@ function InputField() {
         <input
           type="text"
           onChange={(e) =>
-            library.updateState({
-              type: PAGE_CONTROL.SEARCH,
+            library.dispatch({
+              type: PAGE_CONTROL.SEARCHING,
               value: e.target.value,
             })
           }
@@ -21,15 +21,15 @@ function InputField() {
       <div>
         <button
           onClick={() =>
-            library.updateState({ type: PAGE_CONTROL.PREVIOUS, value: 1 })
+            library.dispatch({ type: PAGE_CONTROL.PREVIOUS_PAGE, value: 1 })
           }
         >
           Prev
         </button>
-        <span>Page # {library.baseState.currentPage}</span>
+        <span>Page # {library.galacticLibrary.currentPage}</span>
         <button
           onClick={() =>
-            library.updateState({ type: PAGE_CONTROL.NEXT, value: 1 })
+            library.dispatch({ type: PAGE_CONTROL.NEXT_PAGE, value: 1 })
           }
         >
           Next

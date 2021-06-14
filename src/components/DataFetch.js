@@ -1,8 +1,8 @@
 import axios from "axios";
 import { PAGE_CONTROL } from "./useController";
 
-function DataFetch(setGalacticLibrary) {
-  async function requestStarWarsLibrary(setGalacticLibrary) {
+function DataFetch(dispatch) {
+  async function requestStarWarsLibrary(dispatch) {
     let pageNumber = 1;
     let characterList = [];
     try {
@@ -15,12 +15,12 @@ function DataFetch(setGalacticLibrary) {
         console.log(characterList);
         pageNumber++;
       }
-      requestCharacterInfo(characterList, setGalacticLibrary);
+      requestCharacterInfo(characterList, dispatch);
     } catch {
       console.log("error");
     }
   }
-  requestStarWarsLibrary(setGalacticLibrary);
+  requestStarWarsLibrary(dispatch);
 }
 
 async function requestCharacterInfo(characterList, setGalacticLibrary) {

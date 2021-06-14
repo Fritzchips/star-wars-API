@@ -8,42 +8,39 @@ import useController, { PAGE_CONTROL } from "./components/useController";
 export const libraryContext = React.createContext();
 
 function App() {
-  const [galacticLibrary, setGalacticLibrary] = useController();
+  const [galacticLibrary, dispatch] = useController();
 
   useEffect(() => {
     const sessionTime = Date.now();
     if (localStorage.getItem("library")) {
-      const valueLoaded = JSON.parse(localStorage.getItem("library"));
+      const accessArchive = JSON.parse(localStorage.getItem("library"));
 
-      setGalacticLibrary({
+      dispatch({
         type: PAGE_CONTROL.LOADING,
-        value: valueLoaded,
+        value: accessArchive,
       });
-      console.log("data loaded");
-      console.log("session", sessionTime);
-      console.log("removalDate", valueLoaded.removalDate);
-      if (sessionTime >= valueLoaded.removalDate) {
+
+      if (sessionTime >= accessArchive.removalDate) {
         localStorage.clear();
-        console.log("data cleared, getting fresh data");
-        DataFetch(setGalacticLibrary);
+        DataFetch(dispatch);
       }
     } else {
-      DataFetch(setGalacticLibrary);
+      DataFetch(dispatch);
     }
-    return galacticLibrary;
   }, []);
 
   useEffect(() => {
-    if (galacticLibrary.localCopy.length > 1) {
+    if (galacticLibrary.localList.length > 1) {
       localStorage.setItem("library", JSON.stringify(galacticLibrary));
-      console.log("saved:", localStorage);
     }
-  }, [galacticLibrary]);
-
-  useEffect(() => {}, []);
+  }, [galacticLibrary.localList]);
 
   const checkHandler = () => {
     console.log(galacticLibrary);
+  };
+  const deleteHandler = () => {
+    localStorage.clear();
+    console.log("local storage cleared");
   };
 
   return (
@@ -58,12 +55,13 @@ function App() {
       <br></br>
       <libraryContext.Provider
         value={{
-          baseState: galacticLibrary,
-          updateState: setGalacticLibrary,
+          galacticLibrary: galacticLibrary,
+          dispatch: dispatch,
         }}
       >
         <InputField />
         <button onClick={checkHandler}>Check Value</button>
+        <button onClick={deleteHandler}>DeleteLocal</button>
         <br></br>
         <TableField />
       </libraryContext.Provider>

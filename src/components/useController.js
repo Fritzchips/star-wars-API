@@ -1,70 +1,69 @@
 import { useReducer } from "react";
 
+//Changes here will change all values in other components
 export const PAGE_CONTROL = {
   SAVING: "saving",
   LOADING: "loading",
-  NEXT: "next",
-  PREVIOUS: "previous",
-  SEARCH: "search",
+  NEXT_PAGE: "next page",
+  PREVIOUS_PAGE: "previous page",
+  SEARCHING: "search",
 };
 
 const initialState = {
-  localCopy: [],
+  localList: [],
   userPreview: [],
   currentPage: 1,
   removalDate: "",
 };
 
 const reducer = (state, action) => {
-  const { localCopy, currentPage } = state;
+  const { localList, currentPage } = state;
   switch (action.type) {
     case PAGE_CONTROL.SAVING:
-      const twoMins = 1000 * 30;
+      const twentyFourHours = 1000 * 60 * 60 * 24;
       return {
         ...state,
-        localCopy: [...action.value],
-        userPreview: localCopy.slice(0, 10),
-        removalDate: Date.now() + twoMins,
+        localList: [...action.value],
+        userPreview: localList.slice(0, 10),
+        removalDate: Date.now() + twentyFourHours,
       };
 
     case PAGE_CONTROL.LOADING:
       return (state = { ...action.value });
 
-    case PAGE_CONTROL.NEXT:
+    case PAGE_CONTROL.NEXT_PAGE:
       if (currentPage !== 9) {
-        const displayPage = currentPage + action.value;
+        const turnPage = currentPage + action.value;
         return {
           ...state,
-
-          currentPage: displayPage,
-          userPreview: localCopy.slice(displayPage * 10 - 10, displayPage * 10),
+          currentPage: turnPage,
+          userPreview: localList.slice(turnPage * 10 - 10, turnPage * 10),
         };
       } else {
         return state;
       }
 
-    case PAGE_CONTROL.PREVIOUS:
+    case PAGE_CONTROL.PREVIOUS_PAGE:
       if (currentPage !== 1) {
-        const displayPage = currentPage - action.value;
+        const turnPage = currentPage - action.value;
         return {
           ...state,
-
-          currentPage: displayPage,
-          userPreview: localCopy.slice(displayPage * 10 - 10, displayPage * 10),
+          currentPage: turnPage,
+          userPreview: localList.slice(turnPage * 10 - 10, turnPage * 10),
         };
       } else {
         return state;
       }
 
-    case PAGE_CONTROL.SEARCH:
-      const fake = localCopy.filter((hero) => {
+    case PAGE_CONTROL.SEARCHING:
+      const filteredList = localList.filter((hero) => {
         return hero.name.toLowerCase().includes(action.value.toLowerCase());
       });
       return {
         ...state,
         userPreview: action.value
-          ? fake.splice(0, 10)
-          : localCopy.slice(currentPage * 10 - 10, currentPage * 10),
+          ? filteredList.splice(0, 10)
+          : localList.slice(currentPage * 10 - 10, currentPage * 10),
       };
 
     default:
@@ -73,12 +72,9 @@ const reducer = (state, action) => {
 };
 
 function useController() {
-  const [galacticLibrary, setGalacticLibrary] = useReducer(
-    reducer,
-    initialState
-  );
+  const [galacticLibrary, dispatch] = useReducer(reducer, initialState);
 
-  return [galacticLibrary, setGalacticLibrary];
+  return [galacticLibrary, dispatch];
 }
 
 export default useController;
