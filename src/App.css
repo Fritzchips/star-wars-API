@@ -10,6 +10,11 @@
   font-size: 50px;
 }
 
+.star-wars-effect {
+  font-size: 30px;
+  transform: perspective(300px) rotateX(30deg);
+}
+
 .table-header {
   font-size: 30px;
 }

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../App.css";
 import TableDisplay from "./TableDisplay";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
+import { libraryContext } from "../App";
+import EmptyTable from "./EmptyTable";
 
 function TableField() {
+  const library = useContext(libraryContext);
+
   return (
     <div>
       <Table variant="dark" className="text-center" bordered hover>
@@ -18,8 +22,12 @@ function TableField() {
             <th>Species</th>
           </tr>
         </thead>
-        <tbody striped>
-          <TableDisplay />
+        <tbody>
+          {library.galacticList.userPreview.length > 1 ? (
+            <TableDisplay />
+          ) : (
+            <EmptyTable />
+          )}
         </tbody>
       </Table>
     </div>

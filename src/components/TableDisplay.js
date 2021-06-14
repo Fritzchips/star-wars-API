@@ -5,7 +5,7 @@ function TableDisplay() {
   const library = useContext(libraryContext);
   return (
     <>
-      {library.galacticLibrary.userPreview.map((character) => (
+      {library.galacticList.userPreview.map((character) => (
         <React.Fragment key={character.name}>
           <tr>
             <td>{character.name}</td>

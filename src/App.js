@@ -6,11 +6,12 @@ import DataFetch from "./components/DataFetch";
 import useController, { PAGE_CONTROL } from "./components/useController";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
+import LoadingScreen from "./components/LoadingScreen";
 
 export const libraryContext = React.createContext();
 
 function App() {
-  const [galacticLibrary, dispatch] = useController();
+  const [galacticList, dispatch] = useController();
 
   useEffect(() => {
     const sessionTime = Date.now();
@@ -32,13 +33,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (galacticLibrary.localList.length > 1) {
-      localStorage.setItem("library", JSON.stringify(galacticLibrary));
+    if (galacticList.localList.length > 1) {
+      localStorage.setItem("library", JSON.stringify(galacticList));
     }
-  }, [galacticLibrary.localList]);
+  }, [galacticList.localList]);
 
   const checkHandler = () => {
-    console.log(galacticLibrary);
+    console.log(galacticList);
   };
   const deleteHandler = () => {
     localStorage.clear();
@@ -51,13 +52,13 @@ function App() {
         <header className="text-center">
           <h1 className="header-modify">Galactic Oracle</h1>
           <p>"Using the most ancient power of the force.</p>
-          <p>Transcend through space and time,</p>{" "}
+          <p>Transcend through space and time,</p>
           <p>gain knowledge of beings that help write history."</p>
         </header>
         <br></br>
         <libraryContext.Provider
           value={{
-            galacticLibrary: galacticLibrary,
+            galacticList: galacticList,
             dispatch: dispatch,
           }}
         >
@@ -65,7 +66,11 @@ function App() {
           <button onClick={checkHandler}>Check Value</button>
           <button onClick={deleteHandler}>DeleteLocal</button>
           <br></br>
-          <TableField />
+          {galacticList.localList.length > 1 ? (
+            <TableField />
+          ) : (
+            <LoadingScreen />
+          )}
         </libraryContext.Provider>
       </Container>
     </div>

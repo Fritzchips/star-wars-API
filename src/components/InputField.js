@@ -32,7 +32,7 @@ function InputField() {
           Prev
         </button>
 
-        <span>Page # {library.galacticLibrary.currentPage}</span>
+        <span>Page # {library.galacticList.currentPage}</span>
 
         <button
           className="btn-modify"

@@ -72,9 +72,9 @@ const reducer = (state, action) => {
 };
 
 function useController() {
-  const [galacticLibrary, dispatch] = useReducer(reducer, initialState);
+  const [galacticList, dispatch] = useReducer(reducer, initialState);
 
-  return [galacticLibrary, dispatch];
+  return [galacticList, dispatch];
 }
 
 export default useController;
