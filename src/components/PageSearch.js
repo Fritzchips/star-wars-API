@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { libraryContext } from "../App";
-import { PAGE_CONTROL } from "./useController";
+import { PAGE_CONTROL } from "../data-management/useController";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 
-function InputField() {
+function PageSearch() {
   const library = useContext(libraryContext);
   return (
     <div>
@@ -31,9 +31,7 @@ function InputField() {
         >
           Prev
         </button>
-
-        <span>Page # {library.galacticList.currentPage}</span>
-
+        <span>Page # {library.characterList.currentPage}</span>
         <button
           className="btn-modify"
           onClick={() =>
@@ -47,4 +45,4 @@ function InputField() {
   );
 }
 
-export default InputField;
+export default PageSearch;

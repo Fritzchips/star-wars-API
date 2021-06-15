@@ -1,17 +1,17 @@
 import "./App.css";
 import React, { useEffect } from "react";
-import TableField from "./components/TableField";
-import InputField from "./components/InputField";
-import DataFetch from "./components/DataFetch";
-import useController, { PAGE_CONTROL } from "./components/useController";
+import PageSearch from "./components/PageSearch";
+import DataFetch from "./data-management/DataFetch";
+import useController, { PAGE_CONTROL } from "./data-management/useController";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import LoadingScreen from "./components/LoadingScreen";
+import CharacterTable from "./components/CharacterTable";
 
 export const libraryContext = React.createContext();
 
 function App() {
-  const [galacticList, dispatch] = useController();
+  const [characterList, dispatch] = useController();
 
   useEffect(() => {
     const sessionTime = Date.now();
@@ -33,18 +33,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (galacticList.localList.length > 1) {
-      localStorage.setItem("library", JSON.stringify(galacticList));
+    if (characterList.localList.length > 1) {
+      localStorage.setItem("library", JSON.stringify(characterList));
     }
-  }, [galacticList.localList]);
-
-  const checkHandler = () => {
-    console.log(galacticList);
-  };
-  const deleteHandler = () => {
-    localStorage.clear();
-    console.log("local storage cleared");
-  };
+  }, [characterList.localList]);
 
   return (
     <div className="App">
@@ -58,16 +50,14 @@ function App() {
         <br></br>
         <libraryContext.Provider
           value={{
-            galacticList: galacticList,
+            characterList: characterList,
             dispatch: dispatch,
           }}
         >
-          <InputField />
-          <button onClick={checkHandler}>Check Value</button>
-          <button onClick={deleteHandler}>DeleteLocal</button>
+          <PageSearch />
           <br></br>
-          {galacticList.localList.length > 1 ? (
-            <TableField />
+          {characterList.localList.length > 1 ? (
+            <CharacterTable />
           ) : (
             <LoadingScreen />
           )}

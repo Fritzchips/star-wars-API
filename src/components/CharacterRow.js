@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { libraryContext } from "../App";
 
-function TableDisplay() {
+function CharacterRow() {
   const library = useContext(libraryContext);
   return (
     <>
-      {library.galacticList.userPreview.map((character) => (
+      {library.characterList.userPreview.map((character) => (
         <React.Fragment key={character.name}>
           <tr>
             <td>{character.name}</td>
@@ -21,4 +21,4 @@ function TableDisplay() {
   );
 }
 
-export default TableDisplay;
+export default CharacterRow;

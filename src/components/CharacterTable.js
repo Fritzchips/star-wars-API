@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import "../App.css";
-import TableDisplay from "./TableDisplay";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 import { libraryContext } from "../App";
-import EmptyTable from "./EmptyTable";
+import CharacterRow from "./CharacterRow";
+import CharacterNotFound from "./CharacterNotFound";
 
-function TableField() {
+function CharacterTable() {
   const library = useContext(libraryContext);
 
   return (
@@ -23,10 +23,10 @@ function TableField() {
           </tr>
         </thead>
         <tbody>
-          {library.galacticList.userPreview.length > 1 ? (
-            <TableDisplay />
+          {library.characterList.userPreview.length > 1 ? (
+            <CharacterRow />
           ) : (
-            <EmptyTable />
+            <CharacterNotFound />
           )}
         </tbody>
       </Table>
@@ -34,4 +34,4 @@ function TableField() {
   );
 }
 
-export default TableField;
+export default CharacterTable;

@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function EmptyTable() {
+function CharacterNotFound() {
   return (
     <>
       <tr>
@@ -11,4 +11,4 @@ function EmptyTable() {
   );
 }
 
-export default EmptyTable;
+export default CharacterNotFound;
