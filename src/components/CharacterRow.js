@@ -3,7 +3,7 @@ import { libraryContext } from "../App";
 
 function CharacterRow() {
   const library = useContext(libraryContext);
-  if (library.characterList.userPreview.length > 1) {
+  if (library.characterList.userPreview.length >= 1) {
     return (
       <>
         {library.characterList.userPreview.map((character) => (

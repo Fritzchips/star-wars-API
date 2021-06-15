@@ -4,7 +4,7 @@
 
 Using React, Bootstraps and Heroku
 
-Try out the live version [here]
+Try out the live version [here](https://fritz-star-wars.herokuapp.com/)
 
 ![image](src/images/webpage.png)
 

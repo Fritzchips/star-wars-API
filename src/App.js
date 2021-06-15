@@ -56,7 +56,7 @@ function App() {
         >
           <PageSearch />
           <br></br>
-          {characterList.localList.length > 1 ? (
+          {characterList.localList.length >= 1 ? (
             <CharacterTable />
           ) : (
             <LoadingScreen />
