@@ -21,10 +21,12 @@ const reducer = (state, action) => {
   switch (action.type) {
     case PAGE_CONTROL.SAVING:
       const twentyFourHours = 1000 * 60 * 60 * 24;
+      const characterList = [...action.value];
+
       return {
         ...state,
-        localList: [...action.value],
-        userPreview: localList.slice(0, 10),
+        localList: characterList,
+        userPreview: characterList.slice(0, 10),
         removalDate: Date.now() + twentyFourHours,
       };
 

@@ -1,47 +1,70 @@
 import axios from "axios";
 import { PAGE_CONTROL } from "./useController";
 
-function DataFetch(dispatch) {
-  async function requestStarWarsLibrary(dispatch) {
-    let pageNumber = 1;
-    let starWarsList = [];
-    try {
-      while (pageNumber < 10) {
-        const requestStarWarsPage = await axios.get(
-          `https://swapi.dev/api/people/?page=${pageNumber}`
-        );
-        const decipherPage = await requestStarWarsPage.data.results;
-        starWarsList = [...starWarsList, ...decipherPage];
-        pageNumber++;
-      }
-      requestCharacterInfo(starWarsList, dispatch);
-    } catch {
-      console.log("error");
+async function DataFetch(dispatch) {
+  let pageNumber = 1;
+  let starWarsList = [];
+  try {
+    while (pageNumber < 10) {
+      const requestStarWarsPage = await axios.get(
+        `https://swapi.dev/api/people/?page=${pageNumber}`
+      );
+      const decipherPage = await requestStarWarsPage.data.results;
+      starWarsList = [...starWarsList, ...decipherPage];
+      pageNumber++;
     }
+    requestCharacterInfo(starWarsList, dispatch);
+  } catch (error) {
+    console.error(error);
   }
-  requestStarWarsLibrary(dispatch);
 }
 
 async function requestCharacterInfo(starWarsList, dispatch) {
   try {
-    starWarsList.map(async (character) => {
-      const requestCharacterSpecies = await axios.get(character.species);
-      const speciesName = await requestCharacterSpecies.data.name;
-      const requestCharacterHome = await axios.get(character.homeworld);
-      const homeName = await requestCharacterHome.data.name;
-      const updatedStarWarsList = [
-        ...starWarsList,
-        (character.species = speciesName ? speciesName : "Human"),
-        (character.homeworld = homeName),
-      ];
-      updatedStarWarsList.splice(updatedStarWarsList.length - 2);
-      dispatch({
-        type: PAGE_CONTROL.SAVING,
-        value: updatedStarWarsList,
-      });
+    const promise = Promise.all(
+      starWarsList.map(async (character) => {
+        character.species = await getSpecies(character.species);
+        character.homeworld = await getHomeWorld(character.homeworld);
+        return character;
+      })
+    );
+
+    const characters = await promise;
+
+    dispatch({
+      type: PAGE_CONTROL.SAVING,
+      value: characters,
     });
-  } catch {
-    console.log("error");
+  } catch (error) {
+    console.error(error);
   }
 }
+
+async function getSpecies(speciesURL) {
+  if (speciesURL.length === 0) {
+    return "Human";
+  } else {
+    try {
+      const requestCharacterSpecies = await axios.get(speciesURL[0]);
+      if (!requestCharacterSpecies.data.name) {
+        throw "Error was found in finding character species";
+      }
+      return requestCharacterSpecies.data.name;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+}
+async function getHomeWorld(homeWorldURL) {
+  try {
+    const requestCharacterHome = await axios.get(homeWorldURL);
+    if (!requestCharacterHome.data.name) {
+      throw "Error was found in finding character homeworld";
+    }
+    return requestCharacterHome.data.name;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export default DataFetch;
