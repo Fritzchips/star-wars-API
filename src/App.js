@@ -39,21 +39,21 @@ function App() {
   }, [characterList.localList]);
 
   return (
-    <div className="App">
-      <Container>
-        <header className="text-center">
+    <Container className="App" fluid>
+      <div className="d-flex flex-column star-wars-body">
+        <div className="text-center">
           <h1 className="header-modify">Galactic Oracle</h1>
-          <p>"Using the most ancient power of the force.</p>
-          <p>Transcend through space and time,</p>
-          <p>gain knowledge of beings that help write history."</p>
-        </header>
-        <br></br>
+          <div>"Using the most ancient power of the force.</div>
+          <div>Transcend through space and time,</div>
+          <div>gain knowledge of beings that help write history."</div>
+        </div>
         <libraryContext.Provider
           value={{
             characterList: characterList,
             dispatch: dispatch,
           }}
         >
+          <br></br>
           <PageSearch />
           <br></br>
           {characterList.localList.length >= 1 ? (
@@ -62,8 +62,8 @@ function App() {
             <LoadingScreen />
           )}
         </libraryContext.Provider>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 }
 

@@ -1,13 +1,17 @@
 import React from "react";
-import "../App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Table from "react-bootstrap/Table";
 import CharacterRow from "./CharacterRow";
 
 function CharacterTable() {
   return (
     <div>
-      <Table variant="dark" className="text-center" bordered hover>
+      <Table
+        variant="dark"
+        className="text-center"
+        bordered
+        hover
+        responsive="sm"
+      >
         <thead className="table-header">
           <tr>
             <th>Name</th>

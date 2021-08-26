@@ -1,7 +1,7 @@
 import axios from "axios";
 import { PAGE_CONTROL } from "./useController";
 
-async function DataFetch(dispatch) {
+const DataFetch = async (dispatch) => {
   let pageNumber = 1;
   let starWarsList = [];
   try {
@@ -17,9 +17,9 @@ async function DataFetch(dispatch) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function requestCharacterInfo(starWarsList, dispatch) {
+const requestCharacterInfo = async (starWarsList, dispatch) => {
   try {
     const promise = Promise.all(
       starWarsList.map(async (character) => {
@@ -38,9 +38,9 @@ async function requestCharacterInfo(starWarsList, dispatch) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-async function getSpecies(speciesURL) {
+const getSpecies = async (speciesURL) => {
   if (speciesURL.length === 0) {
     return "Human";
   } else {
@@ -54,8 +54,9 @@ async function getSpecies(speciesURL) {
       console.error(error);
     }
   }
-}
-async function getHomeWorld(homeWorldURL) {
+};
+
+const getHomeWorld = async (homeWorldURL) => {
   try {
     const requestCharacterHome = await axios.get(homeWorldURL);
     if (!requestCharacterHome.data.name) {
@@ -65,6 +66,6 @@ async function getHomeWorld(homeWorldURL) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export default DataFetch;

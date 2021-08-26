@@ -1,6 +1,5 @@
 import { useReducer } from "react";
 
-//Changes here will change all values in other components
 export const PAGE_CONTROL = {
   SAVING: "saving",
   LOADING: "loading",

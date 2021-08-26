@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import { libraryContext } from "../App";
 import { PAGE_CONTROL } from "../data-management/useController";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
 
 function PageSearch() {
   const library = useContext(libraryContext);
   return (
-    <div>
+    <div className="d-flex flex-wrap justify-content-around search-width">
       <span>
         <label>Looking for someone?</label>
         <br></br>
@@ -23,6 +21,7 @@ function PageSearch() {
         ></input>
       </span>
       <span>
+        <br></br>
         <button
           className="btn-modify"
           onClick={() =>
