@@ -19,20 +19,26 @@
   overflow: auto;
 }
 
-.search-width {
+.search-nav {
   width: 70vw;
+  margin-bottom: 20px;
 }
 
-.header-modify {
+.header-title {
   font-family: fantasy;
   font-size: 40px;
 }
 
 .table-header {
-  font-size: 30px;
+  font-size: 25px;
+}
+
+.character-row {
+  font-size: 15px;
 }
 
 .btn-modify {
+  background-color: white;
   border-radius: 7px;
   margin-left: 5px;
   margin-right: 5px;
@@ -40,6 +46,56 @@
 
 @media screen and (max-width: 480px) {
   .table-header {
+    font-size: 10px;
+  }
+
+  .header-title {
     font-size: 20px;
+  }
+
+  .header-text {
+    font-size: 10px;
+  }
+
+  .character-row {
+    font-size: 10px;
+  }
+
+  .search-nav {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .search-input {
+    width: 80px;
+    max-width: 80px;
+  }
+}
+
+@media screen and (max-height: 400px) {
+  .table-header {
+    font-size: 10px;
+  }
+
+  .header-title {
+    font-size: 20px;
+  }
+
+  .header-text {
+    font-size: 10px;
+  }
+
+  .character-row {
+    font-size: 10px;
+  }
+
+  .search-nav {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .search-input {
+    width: 80px;
+    max-width: 80px;
   }
 }

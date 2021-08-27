@@ -42,10 +42,14 @@ function App() {
     <Container className="App" fluid>
       <div className="d-flex flex-column star-wars-body">
         <div className="text-center">
-          <h1 className="header-modify">Galactic Oracle</h1>
-          <div>"Using the most ancient power of the force.</div>
-          <div>Transcend through space and time,</div>
-          <div>gain knowledge of beings that help write history."</div>
+          <h1 className="header-title">Galactic Oracle</h1>
+          <div className="header-text">
+            "Using the most ancient power of the force.
+          </div>
+          <div className="header-text">Transcend through space and time,</div>
+          <div className="header-text">
+            gain knowledge of beings that help write history."
+          </div>
         </div>
         <libraryContext.Provider
           value={{
@@ -55,7 +59,6 @@ function App() {
         >
           <br></br>
           <PageSearch />
-          <br></br>
           {characterList.localList.length >= 1 ? (
             <CharacterTable />
           ) : (

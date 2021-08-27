@@ -8,7 +8,7 @@ function CharacterRow() {
       <>
         {library.characterList.userPreview.map((character) => (
           <React.Fragment key={character.name}>
-            <tr>
+            <tr className="character-row">
               <td>{character.name}</td>
               <td>{character.birth_year}</td>
               <td>{character.height}</td>

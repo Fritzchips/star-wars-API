@@ -5,7 +5,7 @@ import { PAGE_CONTROL } from "../data-management/useController";
 function PageSearch() {
   const library = useContext(libraryContext);
   return (
-    <div className="d-flex flex-wrap justify-content-around search-width">
+    <div className="d-flex flex-wrap search-nav">
       <span>
         <label>Looking for someone?</label>
         <br></br>
@@ -18,6 +18,7 @@ function PageSearch() {
               value: e.target.value,
             })
           }
+          className="search-input"
         ></input>
       </span>
       <span>
