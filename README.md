@@ -31,4 +31,4 @@ Galactic Oracle uses `Axios` to get data from the `Star Wars API`. The data retu
 
 ---
 
-- **Fritz Solibio** - _Software Development Mastermind Student_
+- **Fritz Solibio** - _Software Developer_ [LinkedIn](https://www.linkedin.com/in/fritz-solibio-4aa9b321b/) | [Website](https://www.fritzsolibio.ca/)
